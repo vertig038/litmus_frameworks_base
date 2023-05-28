@@ -63,6 +63,7 @@ public class SystemSettings {
         Settings.System.MASTER_BALANCE,
         Settings.System.SOUND_EFFECTS_ENABLED,
         Settings.System.HAPTIC_FEEDBACK_ENABLED,
+        Settings.System.HAPTIC_ON_SLIDER,
         Settings.System.POWER_SOUNDS_ENABLED,       // moved to global
         Settings.System.DOCK_SOUNDS_ENABLED,        // moved to global
         Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
