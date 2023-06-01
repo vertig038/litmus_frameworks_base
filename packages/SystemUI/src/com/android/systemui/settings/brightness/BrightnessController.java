@@ -395,7 +395,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
 
     private void setBrightness(float brightness) {
         mDisplayManager.setTemporaryBrightness(mDisplayId, brightness);
-        if (brightness != last_val) {
+        if ((brightness != (last_val+64))||(brightness != (last_val-64))) {
             if (Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0 &&
                 Settings.System.getInt(mContext.getContentResolver(),
