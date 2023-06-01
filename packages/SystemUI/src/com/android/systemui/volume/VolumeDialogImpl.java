@@ -343,8 +343,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
             mVolumePanelOnLeft = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);;
         }
 
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-
         initDimens();
     }
 
@@ -2367,14 +2365,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
                     Events.writeEvent(Events.EVENT_TOUCH_LEVEL_CHANGED, mRow.stream,
                             userLevel);
                 }
-            }
-
-            if (Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0 &&
-                Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.HAPTIC_ON_SLIDER, 1) != 0) {
-                AsyncTask.execute(() ->
-                        mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_TICK)));
             }
         }
 
