@@ -57,6 +57,7 @@ public class PixelPropsUtils {
             "com.android.chrome",
             "com.android.vending",
             "com.breel.wallpapers20",
+            "com.google.pixel.livewallpaper",
             "com.nothing.smartcenter"
     };
 
@@ -155,11 +156,20 @@ public class PixelPropsUtils {
             } else if (packageName.equals("com.android.vending")) {
                 sIsFinsky = true;
                 return;
-            } else if (!isPixelDevice) {
+            } else if (packageName.equals("com.breel.wallpapers20")) {
+                propsToChange.putAll(propsToChangePixel7Pro);
+            } else if (packageName.equals("com.google.pixel.livewallpaper")) {
+                propsToChange.putAll(propsToChangePixel7Pro);
+            }
+            else if (!isPixelDevice) {
                 if ((Arrays.asList(packagesToChangePixel7Pro).contains(packageName))) {
                     propsToChange.putAll(propsToChangePixel7Pro);
                 } else if (Arrays.asList(packagesToChangePixelXL).contains(packageName)) {
                     propsToChange.putAll(propsToChangePixelXL);
+                } else if (packageName.equals("com.breel.wallpapers20")) {
+                    propsToChange.putAll(propsToChangePixel7Pro);
+                } else if (packageName.equals("com.google.pixel.livewallpaper")) {
+                    propsToChange.putAll(propsToChangePixel7Pro);
                 } else {
                     propsToChange.putAll(propsToChangePixel5);
                 }
