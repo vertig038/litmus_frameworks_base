@@ -17,10 +17,6 @@
 package com.android.systemui.settings.brightness;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,8 +51,6 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
     private BrightnessMirrorController mMirrorController;
     private boolean mTracking;
     private final FalsingManager mFalsingManager;
-    private Context mContext;
-    private Vibrator mVibrator;
 
     private final Gefingerpoken mOnInterceptListener = new Gefingerpoken() {
         @Override
@@ -200,29 +194,13 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
     }
 
     private final SeekBar.OnSeekBarChangeListener mSeekListener =
-        new SeekBar.OnSeekBarChangeListener() {
+            new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            Context context = seekBar.getContext();
-            Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-            int max = getMax();
-            if (progress > max/10) {
-                if (Settings.System.getInt(context.getContentResolver(),
-                        Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0 &&
-                        Settings.System.getInt(context.getContentResolver(),
-                                Settings.System.HAPTIC_ON_SLIDER, 1) != 0) {
-                    AsyncTask.execute(() ->
-                            vibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_TICK))
-                    );
-                }
-            }
-            
             if (mListener != null) {
                 mListener.onChanged(mTracking, progress, false);
             }
         }
-        
-
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
